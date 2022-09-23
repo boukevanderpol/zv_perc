@@ -49,7 +49,7 @@ ui <- fluidPage(
                      overheid. Dat heb ik dan ook gedaan en mij beperkt tot 
                      de Rijksoverheid. En mijn dank aan p-direkt om het 
                      verstrekken van deze gegevens. "), 
-                   p("Op het eerste volgende tabblad, is de ontwikkeling van 
+                   p("Op het eerste volgende tabblad (\"Het Rijk en ministeries\"), is de ontwikkeling van 
                      het ziekteverzuimpercentage in de tijd geplaatst. Ook is 
                      dit percentage opgedeeld in kort- en langerdurend 
                      ziekteverlof. Een percentage kan wat onpersoonlijk 
@@ -69,10 +69,10 @@ ui <- fluidPage(
                      maar van tal van factoren die erbuiten zijn gelaten; hecht 
                      aan deze voorspelling geen waarde aan en zie dit als 
                      spellerei van mijn kant. "),
-                   p("Ik heb deze Shiny-app niet helemaal uitontwikkeld. 
-                     Een aantal shortcut zijn genomen om de tijdinvestering 
-                     te beperken. Doel voor mij was en de tooling weer eens 
-                     te gebruiken. "),
+                   p("Deze Shiny-app is niet helemaal uitontwikkeld. 
+                     Een aantal shortcuts zijn genomen om de tijdinvestering 
+                     te beperken. Doel voor mij was om opnieuw gevoel te 
+                     krijgen met de tooling. "),
                    hr(style = "border-top: 1px solid #000000;")
                      
                    )
@@ -84,6 +84,7 @@ ui <- fluidPage(
                sidebarLayout(
                  sidebarPanel(
                    p(strong("Selectiemogelijkheden")),
+                   hr(style = "border-top: 1px solid #000000;"),
                    radioButtons(inputId = "onderdelen_2",
                                 label   = "Organisatie:", 
                                 c("Het Rijk" = "Rijk",
@@ -121,6 +122,8 @@ ui <- fluidPage(
       tabPanel("vergelijken",
                sidebarLayout(
                  sidebarPanel(
+                   p(strong("Selectiemogelijkheden")),
+                   hr(style = "border-top: 1px solid #000000;"),
                    selectInput(inputId = "organisatie_3a", 
                                label = "1ste organisatie:", 
                                c("Het Rijk" = "Rijk",
@@ -162,6 +165,8 @@ ui <- fluidPage(
       tabPanel("voorspellen",
                sidebarLayout(
                  sidebarPanel(
+                   p(strong("Selectiemogelijkheden")),
+                   hr(style = "border-top: 1px solid #000000;"),
                    sliderInput(inputId = "aantal_mnd_4",
                                label = "Hoeveel maanden voorspellen:",
                                min = 1,
@@ -185,7 +190,10 @@ ui <- fluidPage(
                    ),
                  mainPanel(
                    br(" "),
-                   plotOutput("g_voorspelling")
+                   plotOutput("g_voorspelling"),
+                   br(" ")#,
+                   #textOutput("tekst_a")
+                   #verbatimTextOutput("tekst_a")
                  )
                )
       )
@@ -236,11 +244,16 @@ server <- function(input, output, session) {
     output$g_vergelijken_verzuim_alg <- renderPlot(
       {grafiek_vergelijken_verzuim_alg()}, res = 96)
     # g_voorspelling -----------------------------------
-    grafiek_voorspelling <- reactive(g_voorspellen(
+    grafiek_voorspelling_a <- reactive(g_voorspellen_a(
       aantal_maanden = input$aantal_mnd_4,
       afk = input$onderdelen_4))
-    output$g_voorspelling <- renderPlot({grafiek_voorspelling()}, 
+    output$g_voorspelling <- renderPlot({grafiek_voorspelling_a()}, 
                                         res = 96)
+    # tekst_a en tekst_b -------------------------------
+    grafiek_voorspelling_b <- reactive(g_voorspellen_b(
+      aantal_maanden = input$aantal_mnd_4,
+      afk = input$onderdelen_4))
+    output$tekst_a <- renderPlot({grafiek_voorspelling_b()})
 
 }
 

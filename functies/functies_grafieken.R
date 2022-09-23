@@ -69,6 +69,7 @@ g_verzuim_alg <- function(afk = "AZ") {
   
 }
 
+
 g_verzuim_duur <- function(afk = "AZ") {
   
   # gegevens samenstellen
@@ -440,7 +441,6 @@ g_zieken <- function(afk = "Rijk",
   return(grafiek)
 }
 
-  
 
 g_vergelijken_verzuim_alg <- function(afk_3a = "AZ",
                                       afk_3b = "EZK") {
@@ -462,7 +462,7 @@ g_vergelijken_verzuim_alg <- function(afk_3a = "AZ",
                   colour = org_afk, 
                   group = org_afk),
               size = rel(1.2)) +
-    scale_colour_manual(values = c("tomato", "red", 
+    scale_colour_manual(values = c("coral", "red", 
                                    "gray50", "black")) +
 #    geom_hline(yintercept = 5.3,
 #               linetype="dashed", colour = "black") +
@@ -495,9 +495,8 @@ g_vergelijken_verzuim_alg <- function(afk_3a = "AZ",
 }
 
 
-
-g_voorspellen <- function(afk = "Rijk",
-                          aantal_maanden = 4) {
+g_voorspellen_a <- function(afk = "Rijk",
+                            aantal_maanden = 4) {
   
   geg_tabel <- verzuim %>%
     filter(org_afk == afk, 
@@ -531,5 +530,30 @@ g_voorspellen <- function(afk = "Rijk",
   
   
   return(fc_model)
+  
+}
+
+
+g_voorspellen_b <- function(afk = "Rijk",
+                            aantal_maanden = 4) {
+  
+  geg_tabel <- verzuim %>%
+    filter(org_afk == afk, 
+           onderwerp == "zv%") %>%
+    mutate(jr_mnd = yearmonth(as.Date(paste0(jaar,"-", maand_nr, "-1")))) %>%
+    group_by(jr_mnd, jaar, maand_nr) %>%
+    summarise(aantal = sum(aantal), .groups = "drop")
+  geg_tabel <- tsibble(geg_tabel, index = jr_mnd)
+  
+  # ETS of ARIMA model -----------------------------
+  #
+  # model creatie
+  fit_model <- geg_tabel %>%
+    #model(ETS(aantal))
+    model(ARIMA(aantal))
+  
+  x <- report(fit_model)
+  
+  return(x)
   
 }
