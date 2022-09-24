@@ -552,8 +552,31 @@ g_voorspellen_b <- function(afk = "Rijk",
     #model(ETS(aantal))
     model(ARIMA(aantal))
   
+  yy1 <- fit_model[[1]][[1]]
+
   x <- report(fit_model)
   
-  return(x)
+  return(yy1)
   
 }
+
+#library(shiny)
+#library(tsibble)
+#library(tsibbledata)
+#library(fabletools)
+#library(fable)
+#library(feasts)
+
+#food <- tsibbledata::aus_retail %>%
+#  filter(Industry == "Food retailing") %>%
+#  summarise(Turnover = sum(Turnover))
+
+#fit_model <- food %>%
+#  model(ARIMA(Turnover))
+
+#xx <- report(fit_model, coefficients())
+
+#yy <- fit_model[[1]][[1]]
+#zz1 <- yy[[1]][[1]]
+#zz2 <- yy[[1]][[6]]
+
