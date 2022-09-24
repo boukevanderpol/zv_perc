@@ -175,6 +175,8 @@ g_ziekmeldingen <- function(afk = "BZK",
     aantal_hoog <- bind_rows(geg_tabel, geg_tabel_lj) %>%
       select(aantal)
     aantal_hoog <- max(aantal_hoog$aantal)
+    waarde_aug <-geg_tabel_lj %>% filter(periode == max(periode)) %>% select(aantal)
+    waarde_aug <- round(waarde_aug$aantal, 0)
     
   } else if (periode == "maand") {
     geg_tabel <- ziekmeldingen_onderdelen %>%
@@ -207,6 +209,8 @@ g_ziekmeldingen <- function(afk = "BZK",
     aantal_hoog <- bind_rows(geg_tabel, geg_tabel_lj) %>%
       select(aantal)
     aantal_hoog <- max(aantal_hoog$aantal)
+    waarde_aug <-geg_tabel_lj %>% filter(periode == max(periode)) %>% select(aantal)
+    waarde_aug <- round(waarde_aug$aantal, 0)
     
   } else if (periode == "dag") { 
     geg_tabel <- ziekmeldingen_onderdelen %>%
@@ -269,10 +273,14 @@ g_ziekmeldingen <- function(afk = "BZK",
                 size = rel(1.5)) +
       geom_hline(yintercept = gemiddelde,
                  linetype="dashed", colour = "black") +
+      annotate(geom = "text", 
+               label = paste0("aantal aug 2022: ", waarde_aug, " ziekmeldingen"),
+               x = 1, y = 0, hjust = 0, vjust = 0, size = rel(3.5), 
+               colour = "red", fontface = "bold") +
       #annotate(geom = "text", 
-      #         label = "stippellijn = gem. aantal ziekmeldingen in 2018-2021",
-      #         x = 1, y = 0, 
-      #         hjust = 0, vjust = 0, size = rel(3), colour = "black") +
+      #         label = paste0("zv% aug 2022: ", waarde_aug, "%"),
+      #         x = 1, y = 0, hjust = 0, vjust = 0, size = rel(3.5), 
+      #         colour = "red", fontface = "bold") +
       ylim(0, max(aantal_hoog)*1.01) + 
       labs(x = NULL,
            y = "aantal ziekmeldingen",
@@ -326,6 +334,8 @@ g_zieken <- function(afk = "Rijk",
     aantal_hoog <- bind_rows(geg_tabel, geg_tabel_lj) %>%
       select(aantal)
     aantal_hoog <- max(aantal_hoog$aantal)
+    waarde_aug <-geg_tabel_lj %>% filter(periode == max(periode)) %>% select(aantal)
+    waarde_aug <- round(waarde_aug$aantal, 0)
     
   } else if (periode == "maand") {
     geg_tabel <- zieken_onderdelen %>%
@@ -358,6 +368,8 @@ g_zieken <- function(afk = "Rijk",
     aantal_hoog <- bind_rows(geg_tabel, geg_tabel_lj) %>%
       select(aantal)
     aantal_hoog <- max(aantal_hoog$aantal)
+    waarde_aug <-geg_tabel_lj %>% filter(periode == max(periode)) %>% select(aantal)
+    waarde_aug <- round(waarde_aug$aantal, 0)
     
   } else if (periode == "dag") { 
     geg_tabel <- zieken_onderdelen %>%
@@ -387,10 +399,6 @@ g_zieken <- function(afk = "Rijk",
                 size = rel(1.2)) +
       geom_hline(yintercept = gemiddelde,
                  linetype="dashed", colour = "black") +
-      #annotate(geom = "text", 
-      #         label = "stippellijn = gem. aantal ziekmeldingen in 2018-2021",
-      #         x = as.Date("2022-01-01"), y = max(geg_tabel$aantal), 
-      #         hjust = 0, vjust = 0, size = rel(3), colour = "black") +
       ylim(0, max(aantal_hoog)*1.01) + 
       labs(x = NULL,
            y = "aantal ziekmeldingen",
@@ -420,10 +428,10 @@ g_zieken <- function(afk = "Rijk",
                 size = rel(1.5)) +
       geom_hline(yintercept = gemiddelde,
                  linetype="dashed", colour = "black") +
-      #annotate(geom = "text", 
-      #         label = "stippellijn = gem. aantal ziekmeldingen in 2018-2021",
-      #         x = 1, y = 0, 
-      #         hjust = 0, vjust = 0, size = rel(3), colour = "black") +
+      annotate(geom = "text", 
+               label = paste0("aantal aug 2022: ", waarde_aug, " zieken"),
+               x = 1, y = 0, hjust = 0, vjust = 0, size = rel(3.5), 
+               colour = "red", fontface = "bold") +
       ylim(0, max(aantal_hoog)*1.01) + 
       labs(x = NULL,
            y = "aantal ziekmeldingen",
