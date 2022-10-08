@@ -216,7 +216,7 @@ body <- dashboardBody(
                            selected = "Rijk")
             ),
             box(
-              title = "Voorspelling obv het ARIMA model", status = "primary",
+              title = "Voorspelling obv ARIMA model", status = "primary",
               solidHeader = TRUE,
               width = 8,
               br(" "),
