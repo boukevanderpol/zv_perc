@@ -48,14 +48,14 @@ g_verzuim_alg <- function(afk = "AZ") {
                linetype="dashed", colour = "black") +
     annotate(geom = "text", label = paste0("gem. zv% 2019-2021 ", gem_verzuim_rijk, "%"),
              x = 1, y = 5.65, hjust = 0, size = 2.8, colour = "black") +
-    annotate(geom = "text", 
-             label = paste0("zv% aug 2022: ", waarde_aug, "%"),
-             x = 1, y = 0, hjust = 0, vjust = 0, size = rel(3.5), 
-             colour = "red", fontface = "bold") +
+    #annotate(geom = "text", 
+    #         label = paste0("zv% aug 2022: ", waarde_aug, "%"),
+    #         x = 1, y = 0, hjust = 0, vjust = 0, size = rel(3.5), 
+    #         colour = "red", fontface = "bold") +
     ylim(0, max_verzuim * 1.2) + 
     labs(x = NULL,
          y = "percentage ziekteverzuim",
-         title = "Ontwikkeling ziekteverzuimpercentage") +
+         title = "algemeen ziekteverzuimpercentage") +
     theme_minimal() + 
     theme(axis.title.y = element_text(size = 8),
           axis.title.x = element_text(size = 8),
@@ -118,7 +118,7 @@ g_verzuim_duur <- function(afk = "AZ") {
     facet_grid(rows = vars(duur)) + 
     labs(x = NULL,
          y = "percentage ziekteverzuim",
-         title = "Verdeling ziekteverzuimperc. in duur/dagen") +
+         title = "zv% verdeeld in duur/dagen") +
     theme_minimal() + 
     theme(axis.title.y = element_text(size = 8),
           axis.title.x = element_text(size = 8),
@@ -247,7 +247,7 @@ g_ziekmeldingen <- function(afk = "BZK",
       ylim(0, max(aantal_hoog)*1.01) + 
       labs(x = NULL,
            y = "aantal ziekmeldingen",
-           title = "Ontwikkeling aantal ziekmeldingen in 2022",
+           title = NULL, #"Ontwikkeling aantal ziekmeldingen in 2022",
            subtitle = "(stippellijn = gem. aantal ziekmeldingen in 2019-2021)", 
            colour = NULL) +
       theme_minimal() + 
@@ -273,10 +273,10 @@ g_ziekmeldingen <- function(afk = "BZK",
                 size = rel(1.5)) +
       geom_hline(yintercept = gemiddelde,
                  linetype="dashed", colour = "black") +
-      annotate(geom = "text", 
-               label = paste0("aantal aug 2022: ", waarde_aug, " ziekmeldingen"),
-               x = 1, y = 0, hjust = 0, vjust = 0, size = rel(3.5), 
-               colour = "red", fontface = "bold") +
+      #annotate(geom = "text", 
+      #         label = paste0("aantal aug 2022: ", waarde_aug, " ziekmeldingen"),
+      #         x = 1, y = 0, hjust = 0, vjust = 0, size = rel(3.5), 
+      #         colour = "red", fontface = "bold") +
       #annotate(geom = "text", 
       #         label = paste0("zv% aug 2022: ", waarde_aug, "%"),
       #         x = 1, y = 0, hjust = 0, vjust = 0, size = rel(3.5), 
@@ -284,7 +284,7 @@ g_ziekmeldingen <- function(afk = "BZK",
       ylim(0, max(aantal_hoog)*1.01) + 
       labs(x = NULL,
            y = "aantal ziekmeldingen",
-           title = "Ontwikkeling aantal ziekmeldingen", 
+           title = NULL, #"Ontwikkeling aantal ziekmeldingen", 
            subtitle = "(stippellijn = gem. aantal ziekmeldingen in 2019-2021)", 
            colour = NULL) +
       theme_minimal() + 
@@ -402,7 +402,7 @@ g_zieken <- function(afk = "Rijk",
       ylim(0, max(aantal_hoog)*1.01) + 
       labs(x = NULL,
            y = "aantal ziekmeldingen",
-           title = "Ontwikkeling gemiddeld aantal zieken in 2022",
+           title = NULL, #"Ontwikkeling gemiddeld aantal zieken in 2022",
            subtitle = "(stippellijn = gem. aantal zieken in 2019-2021)", 
            colour = NULL) +
       theme_minimal() + 
@@ -428,14 +428,14 @@ g_zieken <- function(afk = "Rijk",
                 size = rel(1.5)) +
       geom_hline(yintercept = gemiddelde,
                  linetype="dashed", colour = "black") +
-      annotate(geom = "text", 
-               label = paste0("aantal aug 2022: ", waarde_aug, " zieken"),
-               x = 1, y = 0, hjust = 0, vjust = 0, size = rel(3.5), 
-               colour = "red", fontface = "bold") +
+      #annotate(geom = "text", 
+      #         label = paste0("aantal aug 2022: ", waarde_aug, " zieken"),
+      #         x = 1, y = 0, hjust = 0, vjust = 0, size = rel(3.5), 
+      #         colour = "red", fontface = "bold") +
       ylim(0, max(aantal_hoog)*1.01) + 
       labs(x = NULL,
            y = "aantal ziekmeldingen",
-           title = "Ontwikkeling aantal zieken", 
+           title = NULL, #"Ontwikkeling aantal zieken", 
            subtitle = "(stippellijn = gem. aantal zieken in 2019-2021)", 
            colour = NULL) +
       theme_minimal() + 
@@ -487,7 +487,7 @@ g_vergelijken_verzuim_alg <- function(afk_3a = "AZ",
              x = 1, y = 5.65, hjust = 0, size = 2.8, colour = "black") +
     labs(x = NULL,
          y = "percentage ziekteverzuim",
-         title = "Vergelijking van het ziekteverzuimpercentage") +
+         title = NULL) + #"Vergelijking van het ziekteverzuimpercentage") +
     theme_minimal() + 
     theme(axis.title.y = element_text(size = 8),
           axis.title.x = element_text(size = 8),
