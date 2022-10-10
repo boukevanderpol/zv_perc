@@ -17,6 +17,7 @@ library(tsibbledata)
 library(fabletools)
 library(fable)
 library(feasts)
+library(urca)
 
 source("./functies/functies_laden.R")
 source("./functies/functies_grafieken.R")
@@ -115,7 +116,7 @@ body <- dashboardBody(
                              "Ministerie van BuZa" = "BuZa"),
                            selected = "Rijk"),
               radioButtons(inputId  = "dag_week_maand_2", 
-                           label    = "Periode", # voor de presentatie van het aantal zieken en ziekmeldingen:", 
+                           label    = "Periode (zieken / ziekmeldingen):", # voor de presentatie van het aantal zieken en ziekmeldingen:", 
                            selected = "week", choiceNames = list(
                              "dag", "week", "maand"), 
                            choiceValues = list("dag", "week", "maand"))

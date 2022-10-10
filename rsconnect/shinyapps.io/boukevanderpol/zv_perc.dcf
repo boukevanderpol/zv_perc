@@ -5,9 +5,10 @@ account: boukevanderpol
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 7250296
-bundleId: 6382558
+bundleId: 6382585
 url: https://boukevanderpol.shinyapps.io/zv_perc/
-when: 1665235136.52849
-lastSyncTime: 1665235136.5285
+when: 1665236923.14677
+lastSyncTime: 1665236923.14679
 asMultiple: FALSE
 asStatic: FALSE
+ignoredFiles: app - kopie.R|testing_r_git.R
